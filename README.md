@@ -1,59 +1,67 @@
-# AngularMovieCatalog
+# Angular Movie Catalog
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
+This is a frontend application built with Angular to consume the [TMDB (The Movie Database) API](https://developer.themoviedb.org/reference/getting-started) and display a catalog of movies. This project was developed as a technical ramp-up to demonstrate foundational Angular skills.
 
-## Development server
+## 🎯 Objective
 
-To start a local development server, run:
+Develop a modern, responsive single-page application (SPA) that allows users to browse popular movies, search for specific titles, view detailed information, and manage a protected favorites area.
 
-```bash
-ng serve
+## ✨ Functional Requirements
+
+- **List Popular Movies:** Fetches and displays a list of currently popular movies.
+- **Movie Details:** Displays the poster, title, description (overview), rating, and release date for each movie.
+- **Search Functionality:** Allows users to search for movies by name.
+- **Dedicated Details Page:** A dynamic route that presents detailed information about a selected movie.
+- **Pagination:** Implements pagination for navigating through movie lists and search results.
+- **Error Handling:** Displays friendly error messages when API requests fail or no results are found.
+
+## 🛠️ Technical Stack & Architecture
+
+- **Framework:** Angular & Angular CLI
+- **Language:** TypeScript
+- **Styling:** SCSS (Responsive Layout)
+- **API Integration:** HttpClient
+- **Architecture:** Component-based architecture with separated services for API calls and defined models/interfaces for data typing.
+
+## 📁 Project Structure
+
+```text
+src/
+└── app/
+    ├── components/      # Pages and reusable UI components
+    ├── services/        # API integration logic (MovieService)
+    ├── models/          # TypeScript interfaces (Movie, MovieResponse)
+    ├── guards/          # Route guards
+    ├── environments/    # Environment variables (API keys)
+    ├── app.routes.ts
+    └── app.config.ts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛣️ Routing
 
-## Code scaffolding
+The application implements the following routes:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Route | Description |
+| ------ | ----------- |
+| `/` | Home page with the list of popular movies |
+| `/movie/:id` | Movie details page |
+| `/favorites` | Protected favorites page |
+| `**` | 404 - Page Not Found |
 
-```bash
-ng generate component component-name
-```
+## 🔒 Route Protection (Guards)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The `/favorites` route is protected by a simple Angular Guard to demonstrate basic access control.
 
-```bash
-ng generate --help
-```
+- Unauthenticated users are redirected.
+- Authenticated users can access the route normally.
 
-## Building
+## 🚀 Features
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Browse popular movies
+- Search movies by title
+- View detailed movie information
+- Responsive user interface
+- Protected routes using Angular Guards
+- RESTful API integration with TMDB
+- Pagination support
+- Error handling for failed requests
