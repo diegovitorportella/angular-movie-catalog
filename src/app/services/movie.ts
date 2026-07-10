@@ -13,12 +13,17 @@ export class MovieService {
   private accessToken = environment.tmdbAccessToken;
 
   getPopularMovies(page: number = 1): Observable<MovieResponse> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.accessToken}`
-    });
-
+    const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
     return this.http.get<MovieResponse>(
       `${this.apiUrl}/movie/popular?language=pt-BR&page=${page}`, 
+      { headers }
+    );
+  }
+
+  searchMovies(query: string, page: number = 1): Observable<MovieResponse> {
+    const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+    return this.http.get<MovieResponse>(
+      `${this.apiUrl}/search/movie?query=${query}&language=pt-BR&page=${page}`,
       { headers }
     );
   }
