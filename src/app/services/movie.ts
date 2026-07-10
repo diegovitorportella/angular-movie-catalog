@@ -27,4 +27,12 @@ export class MovieService {
       { headers }
     );
   }
+
+  getMovieDetails(id: string): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+    return this.http.get<any>(
+      `${this.apiUrl}/movie/${id}?language=pt-BR`,
+      { headers }
+    );
+  }
 }
