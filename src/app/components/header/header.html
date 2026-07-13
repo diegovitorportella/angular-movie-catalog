@@ -1,1 +1,23 @@
-<p>header works!</p>
+<header style="background-color: #1a1a1a; padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white;">
+  
+  <div style="display: flex; gap: 20px; align-items: center;">
+    <h1 style="margin: 0; font-size: 24px; cursor: pointer;" routerLink="/">🎬 TMDB Angular</h1>
+    <nav style="display: flex; gap: 15px;">
+      <a routerLink="/" style="color: white; text-decoration: none;">Home</a>
+      <a routerLink="/favorites" style="color: white; text-decoration: none;">Favoritos 🔒</a>
+    </nav>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 15px;">
+    <span>
+      Status: {{ authService.isLoggedIn() ? '🟢 Logado' : '🔴 Deslogado' }}
+    </span>
+    <button 
+      (click)="toggleLogin()"
+      style="padding: 8px 16px; cursor: pointer; border: none; border-radius: 4px; background-color: #007bff; color: white; font-weight: bold;"
+    >
+      {{ authService.isLoggedIn() ? 'Sair' : 'Entrar' }}
+    </button>
+  </div>
+
+</header>
