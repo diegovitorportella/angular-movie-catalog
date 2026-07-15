@@ -16,17 +16,20 @@ export class MovieDetailsComponent implements OnInit {
   public favoritesService = inject(FavoritesService);
   
   public movie = signal<any>(null);
+  public errorMessage = signal<string | null>(null);
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     
     if (id) {
+      this.errorMessage.set(null);
       this.movieService.getMovieDetails(id).subscribe({
         next: (response: any) => {
           this.movie.set(response);
         },
         error: (err: any) => {
           console.error('Erro ao buscar detalhes do filme:', err);
+          this.errorMessage.set('Não foi possível carregar os detalhes deste filme. Ele pode não existir ou ocorreu uma falha na rede.');
         }
       });
     }
