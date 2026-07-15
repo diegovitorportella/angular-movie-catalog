@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie';
+import { FavoritesService } from '../../services/favorites';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,6 +13,8 @@ import { MovieService } from '../../services/movie';
 export class MovieDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private movieService = inject(MovieService);
+  public favoritesService = inject(FavoritesService);
+  
   public movie = signal<any>(null);
 
   ngOnInit(): void {
@@ -27,5 +30,17 @@ export class MovieDetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  toggleFavorite() {
+    const currentMovie = this.movie();
+    if (currentMovie) {
+      this.favoritesService.toggleFavorite(currentMovie);
+    }
+  }
+
+  isFavorite(): boolean {
+    const currentMovie = this.movie();
+    return currentMovie ? this.favoritesService.isFavorite(currentMovie.id) : false;
   }
 }
