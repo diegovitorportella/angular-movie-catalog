@@ -35,4 +35,20 @@ export class MovieService {
       { headers }
     );
   }
+
+  getMovieCredits(id: string): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+    return this.http.get<any>(
+      `${this.apiUrl}/movie/${id}/credits?language=pt-BR`,
+      { headers }
+    );
+  }
+
+  getMovieRecommendations(id: string): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+    return this.http.get<any>(
+      `${this.apiUrl}/movie/${id}/recommendations?language=pt-BR`,
+      { headers }
+    );
+  }
 }

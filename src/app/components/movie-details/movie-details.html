@@ -24,6 +24,24 @@
         <p class="synopsis-text">
           {{ movie().overview }}
         </p>
+
+        @if (credits()?.cast?.length) {
+          <h3 class="synopsis-title">Elenco Principal</h3>
+          <p class="meta">
+            @for (actor of credits().cast.slice(0, 5); track actor.id) {
+              <span>{{ actor.name }} ({{ actor.character }}){{ $last ? '' : ', ' }}</span>
+            }
+          </p>
+        }
+
+        @if (recommendations()?.results?.length) {
+          <h3 class="synopsis-title">Filmes Recomendados</h3>
+          <p class="meta">
+            @for (rec of recommendations().results.slice(0, 3); track rec.id) {
+              <span>{{ rec.title }}{{ $last ? '' : ' | ' }}</span>
+            }
+          </p>
+        }
         
         <div class="action-buttons">
           <a routerLink="/" class="btn-dark">Voltar para o Catálogo</a>

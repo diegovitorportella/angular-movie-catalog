@@ -1,6 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MovieService } from '../../services/movie';
 import { FavoritesService } from '../../services/favorites';
 
 @Component({
@@ -12,26 +11,21 @@ import { FavoritesService } from '../../services/favorites';
 })
 export class MovieDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private movieService = inject(MovieService);
   public favoritesService = inject(FavoritesService);
-  
   public movie = signal<any>(null);
+  public credits = signal<any>(null);
+  public recommendations = signal<any>(null);
   public errorMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    
-    if (id) {
-      this.errorMessage.set(null);
-      this.movieService.getMovieDetails(id).subscribe({
-        next: (response: any) => {
-          this.movie.set(response);
-        },
-        error: (err: any) => {
-          console.error('Erro ao buscar detalhes do filme:', err);
-          this.errorMessage.set('Não foi possível carregar os detalhes deste filme. Ele pode não existir ou ocorreu uma falha na rede.');
-        }
-      });
+    const resolvedData = this.route.snapshot.data['movieData'];
+
+    if (resolvedData) {
+      this.movie.set(resolvedData.details);
+      this.credits.set(resolvedData.credits);
+      this.recommendations.set(resolvedData.recommendations);
+    } else {
+      this.errorMessage.set('Não foi possível carregar os detalhes deste filme.');
     }
   }
 
