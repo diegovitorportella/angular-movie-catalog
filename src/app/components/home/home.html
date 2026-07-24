@@ -8,13 +8,35 @@
   }
 
   <div class="search-container">
-    <input 
-      type="text" 
-      #searchInput 
-      placeholder="Digite o nome de um filme..." 
-      (keyup.enter)="onSearch(searchInput.value)"
-      class="search-input"
-    >
+    <div class="search-box">
+      <input 
+        type="text" 
+        #searchInput 
+        placeholder="Digite o nome de um filme..." 
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        (input)="onInput(searchInput.value)"
+        (keyup.enter)="onSearch(searchInput.value)"
+        class="search-input"
+        autocomplete="off"
+      >
+
+      @if (filteredHistory$ | async; as history) {
+        @if (showDropdown() && history.length) {
+          <ul class="history-dropdown">
+            @for (item of history; track item) {
+              <li 
+                class="history-item"
+                (mousedown)="selectHistory(item, searchInput)">
+                <span class="history-icon">🕘</span>
+                <span class="history-text">{{ item }}</span>
+              </li>
+            }
+          </ul>
+        }
+      }
+    </div>
+
     <button (click)="onSearch(searchInput.value)" class="btn-primary">
       Buscar
     </button>
