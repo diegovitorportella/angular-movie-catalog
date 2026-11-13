@@ -133,6 +133,29 @@ Authentication state is a simple `signal` toggled from the header, kept intentio
   npm run build
   ```
 
+## ☁️ Deployment (Vercel)
+
+The app is deployed on [Vercel](https://vercel.com) as a static SPA. Configuration lives in [`vercel.json`](vercel.json):
+
+- **Build command:** `node scripts/set-env.js && npm run build`
+- **Output directory:** `dist/angular-movie-catalog/browser`
+- **Rewrites:** every route falls back to `index.html`, so deep links such as `/movie/123` and `/favorites` work on refresh.
+
+Since `src/environments/environment.ts` is git-ignored, [`scripts/set-env.js`](scripts/set-env.js) generates it at build time from environment variables. Set these in **Project Settings → Environment Variables** on Vercel:
+
+| Variable | Description |
+| -------- | ----------- |
+| `TMDB_API_KEY` | Your TMDB API key |
+| `TMDB_ACCESS_TOKEN` | Your TMDB read access token |
+
+To deploy:
+
+1. Import the GitHub repository in Vercel (or run `npx vercel` from the project root).
+2. Add the two environment variables above.
+3. Deploy. Every push to the main branch triggers a new production deployment.
+
+> **Note:** this is a frontend-only app, so the TMDB token is bundled into the client code. Use TMDB's read-only access token and never reuse credentials with broader permissions.
+
 ## 🚀 Features
 
 - Browse popular movies
