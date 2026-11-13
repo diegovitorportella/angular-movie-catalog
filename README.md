@@ -2,6 +2,8 @@
 
 This is a frontend application built with Angular to consume the [TMDB (The Movie Database) API](https://developer.themoviedb.org/reference/getting-started) and display a catalog of movies. This project was developed as a technical ramp-up to demonstrate foundational Angular skills, plus two advanced features focused on **RxJS** and **reactive data loading**.
 
+🌐 **Live demo:** [angular-movie-catalog-lyart.vercel.app](https://angular-movie-catalog-lyart.vercel.app/)
+
 ## 🎯 Objective
 
 Develop a modern, responsive single-page application (SPA) that allows users to browse popular movies, search for specific titles, view detailed information, and manage a protected favorites area.
@@ -135,7 +137,7 @@ Authentication state is a simple `signal` toggled from the header, kept intentio
 
 ## ☁️ Deployment (Vercel)
 
-The app is deployed on [Vercel](https://vercel.com) as a static SPA. Configuration lives in [`vercel.json`](vercel.json):
+The app is deployed on [Vercel](https://vercel.com) as a static SPA at [angular-movie-catalog-lyart.vercel.app](https://angular-movie-catalog-lyart.vercel.app/). Configuration lives in [`vercel.json`](vercel.json):
 
 - **Build command:** `node scripts/set-env.js && npm run build`
 - **Output directory:** `dist/angular-movie-catalog/browser`
